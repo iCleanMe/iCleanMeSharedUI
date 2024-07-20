@@ -11,6 +11,7 @@ let package = Package(
     products: [
         .library(
             name: "iCleanMeSharedUI",
+            type: .dynamic,
             targets: ["iCleanMeSharedUI"]),
     ],
     dependencies: [
