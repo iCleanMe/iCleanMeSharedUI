@@ -4,21 +4,21 @@
 import PackageDescription
 
 let package = Package(
-    name: "SharedUI",
+    name: "iCleanMeSharedUI",
     platforms: [
         .iOS(.v17)
     ],
     products: [
         .library(
-            name: "SharedUI",
-            targets: ["SharedUI"]),
+            name: "iCleanMeSharedUI",
+            targets: ["iCleanMeSharedUI"]),
     ],
     dependencies: [
         .package(url: "https://github.com/nikolainobadi/NnSwiftUIKit", branch: "main")
     ],
     targets: [
         .target(
-            name: "SharedUI",
+            name: "iCleanMeSharedUI",
             dependencies: [
                 "NnSwiftUIKit"
             ],

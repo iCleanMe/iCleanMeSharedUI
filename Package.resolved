@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "nnswiftuikit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/nikolainobadi/NnSwiftUIKit",
+      "state" : {
+        "branch" : "main",
+        "revision" : "3288d86af9d81b83671cecd027f985bc18c85129"
+      }
+    }
+  ],
+  "version" : 2
+}
