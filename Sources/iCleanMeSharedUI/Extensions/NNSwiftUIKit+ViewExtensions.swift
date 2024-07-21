@@ -145,8 +145,8 @@ public extension View {
         nnDelayedOnAppear(seconds: seconds, perform: action)
     }
 
-    func tappable(tapIsActive: Bool = true, withChevron: Bool = false, onTapGesture: @escaping () -> Void) -> some View {
-        nnTappable(tapIsActive: tapIsActive, withChevron: withChevron, tint: .white, onTapGesture: onTapGesture)
+    func tappable(tapIsActive: Bool = true, withChevron: Bool = false, tint: Color = .white, onTapGesture: @escaping () -> Void) -> some View {
+        nnTappable(tapIsActive: tapIsActive, withChevron: withChevron, tint: tint, onTapGesture: onTapGesture)
     }
     
     func withSwipeAction(_ title: String, image: String? = nil, tint: Color, edge: HorizontalEdge = .trailing, isActive: Bool = true, action: @escaping () -> Void) -> some View {
