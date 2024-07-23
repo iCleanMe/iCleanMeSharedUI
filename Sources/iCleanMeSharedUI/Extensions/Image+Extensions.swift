@@ -15,6 +15,10 @@ public extension Image {
     static var readyMop: Image {
         return makeMascotImage(.readyMop)
     }
+    
+    static var mopping: Image {
+        return makeMascotImage(.mopping)
+    }
 }
 
 extension Image {
@@ -26,7 +30,7 @@ extension Image {
 
 // MARK: - Dependencies
 enum MascotImage: String {
-    case readyMop, holdMop
+    case readyMop, holdMop, mopping
     
     var accessibilityLabel: String {
         switch self {
@@ -34,6 +38,8 @@ enum MascotImage: String {
             return "An illustrated figure holding a mop over should and bucket on ground."
         case .holdMop:
             return "An illustrated figure holding a mop and bucket."
+        case .mopping:
+            return "An illustrated figure holding a mop and wiping the floor with it."
         }
     }
 }
