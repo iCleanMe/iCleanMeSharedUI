@@ -141,6 +141,10 @@ public extension View {
 
 // MARK: - Utility
 public extension View {
+    func onShake(isActive: Bool, action: @escaping () -> Void) -> some View {
+        nnOnShake(isActive: isActive, action: action)
+    }
+    
     func delayedOnAppear(seconds: Double, perform action: @escaping () -> Void) -> some View {
         nnDelayedOnAppear(seconds: seconds, perform: action)
     }
