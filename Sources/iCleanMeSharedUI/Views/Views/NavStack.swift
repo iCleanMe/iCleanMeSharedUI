@@ -5,6 +5,7 @@
 //  Created by Nikolai Nobadi on 7/3/24.
 //
 
+#if canImport(UIKit)
 import SwiftUI
 import NnSwiftUIKit
 
@@ -49,3 +50,4 @@ public struct CustomPathNavStack<Data, Content: View>: View where Data: MutableC
             .tint(.white)
     }
 }
+#endif

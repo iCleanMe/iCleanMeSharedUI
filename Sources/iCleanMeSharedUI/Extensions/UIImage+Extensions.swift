@@ -5,6 +5,7 @@
 //  Created by Nikolai Nobadi on 7/3/24.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 extension UIImage {
@@ -23,3 +24,4 @@ extension UIImage {
         return image
     }
 }
+#endif

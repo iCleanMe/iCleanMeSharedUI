@@ -5,6 +5,7 @@
 //  Created by Nikolai Nobadi on 7/2/24.
 //
 
+#if canImport(UIKit)
 import UIKit
 import SwiftUI
 
@@ -28,3 +29,4 @@ public struct LoginIconView: View {
 #Preview {
     LoginIconView()
 }
+#endif

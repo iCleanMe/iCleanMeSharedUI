@@ -15,10 +15,42 @@ public extension DisplayableError {
     }
 }
 
-
+#if canImport(UIKit)
 public extension View {
     var isSmallPhone: Bool { UIScreen.main.bounds.size.height < 650.0 }
     
+    func getTopController() -> UIViewController? {
+        return UIApplication.shared.getTopViewController()
+    }
+    
+    func onShake(isActive: Bool, action: @escaping () -> Void) -> some View {
+        nnOnShake(isActive: isActive, action: action)
+    }
+    
+    func withNavBarDismissButton(isActive: Bool = true, placement: ToolbarItemPlacement? = nil, textColor: Color = .white, dismissType: NavBarDismissType = .xmark, dismiss: (() -> Void)? = nil) -> some View {
+        nnWithNavBarDismissButton(isActive: isActive, placement: placement, textColor: textColor, dismissType: dismissType, dismiss: dismiss)
+    }
+    
+    func withNavBarButton(placement: ToolbarItemPlacement = .navigationBarTrailing, buttonContent: NavBarButtonContent, font: Font = .title2, textColor: Color = .primary, action: @escaping () -> Void) -> some View {
+        nnWithNavBarButton(placement: placement, buttonContent: buttonContent, font: font, textColor: textColor, action: action)
+    }
+    
+    func withDiscardChangesDismissButton<Item: Equatable>(itemToModify: Item) -> some View {
+        nnWithDiscardChangesNavBarDismissButton(itemToModify: itemToModify)
+    }
+    
+    func showcased(_ title: String, order: Int, cornerRadius: CGFloat, style: RoundedCornerStyle = .continuous, scale: CGFloat = 1) -> some View {
+        self.nnShowcased(title, order: order, cornerRadius: cornerRadius, style: style, scale: scale)
+    }
+    
+    func canShowcaseViews(showHighlights: Bool, onFinished: @escaping () -> Void) -> some View {
+        self.nnCanShowcaseViews(showHighlights: showHighlights, onFinished: onFinished)
+    }
+}
+#endif
+
+
+public extension View {
     func getWidthPercent(_ percent: CGFloat) -> CGFloat {
         return nnGetWidthPercent(percent)
     }
@@ -26,11 +58,8 @@ public extension View {
     func getHeightPercent(_ percent: CGFloat) -> CGFloat {
         return nnGetHeightPercent(percent)
     }
-    
-    func getTopController() -> UIViewController? {
-        return UIApplication.shared.getTopViewController()
-    }
 }
+
 
 // MARK: - Error Handling
 public extension View {
@@ -90,22 +119,6 @@ public extension View {
 }
 
 
-// MARK: - Navigation
-public extension View {
-    func withNavBarDismissButton(isActive: Bool = true, placement: ToolbarItemPlacement? = nil, textColor: Color = .white, dismissType: NavBarDismissType = .xmark, dismiss: (() -> Void)? = nil) -> some View {
-        nnWithNavBarDismissButton(isActive: isActive, placement: placement, textColor: textColor, dismissType: dismissType, dismiss: dismiss)
-    }
-    
-    func withNavBarButton(placement: ToolbarItemPlacement = .navigationBarTrailing, buttonContent: NavBarButtonContent, font: Font = .title2, textColor: Color = .primary, action: @escaping () -> Void) -> some View {
-        nnWithNavBarButton(placement: placement, buttonContent: buttonContent, font: font, textColor: textColor, action: action)
-    }
-    
-    func withDiscardChangesDismissButton<Item: Equatable>(itemToModify: Item) -> some View {
-        nnWithDiscardChangesNavBarDismissButton(itemToModify: itemToModify)
-    }
-}
-
-
 // MARK: - Design
 public extension View {
     func asRowItem(withChevron: Bool = false) -> some View {
@@ -141,10 +154,6 @@ public extension View {
 
 // MARK: - Utility
 public extension View {
-    func onShake(isActive: Bool, action: @escaping () -> Void) -> some View {
-        nnOnShake(isActive: isActive, action: action)
-    }
-    
     func delayedOnAppear(seconds: Double, perform action: @escaping () -> Void) -> some View {
         nnDelayedOnAppear(seconds: seconds, perform: action)
     }
@@ -155,17 +164,5 @@ public extension View {
     
     func withSwipeAction(_ title: String, image: String? = nil, tint: Color, edge: HorizontalEdge = .trailing, isActive: Bool = true, action: @escaping () -> Void) -> some View {
         nnWithSwipeAction(title, imageName: image, tint: tint, edge: edge, isActive: isActive, action: action)
-    }
-}
-
-
-// MARK: - Showcase
-public extension View {
-    func showcased(_ title: String, order: Int, cornerRadius: CGFloat, style: RoundedCornerStyle = .continuous, scale: CGFloat = 1) -> some View {
-        self.nnShowcased(title, order: order, cornerRadius: cornerRadius, style: style, scale: scale)
-    }
-    
-    func canShowcaseViews(showHighlights: Bool, onFinished: @escaping () -> Void) -> some View {
-        self.nnCanShowcaseViews(showHighlights: showHighlights, onFinished: onFinished)
     }
 }

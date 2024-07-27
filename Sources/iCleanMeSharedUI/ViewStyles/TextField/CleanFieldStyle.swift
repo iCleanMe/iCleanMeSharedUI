@@ -5,6 +5,7 @@
 //  Created by Nikolai Nobadi on 7/5/24.
 //
 
+#if canImport(UIKit)
 import SwiftUI
 
 public struct CleanFieldStyle: TextFieldStyle {
@@ -27,3 +28,4 @@ public extension TextFieldStyle where Self == CleanFieldStyle {
         return .init(alignment: alignment, keyboardType: keyboardType)
     }
 }
+#endif
