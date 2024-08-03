@@ -14,6 +14,12 @@ public struct TryButton<Label>: View where Label: View {
     let role: NnButtonRole?
     let action: () throws -> Void
     
+    public init(action: @escaping () throws -> Void, role: NnButtonRole? = nil, label: @escaping () -> Label) {
+        self.action = action
+        self.label = label
+        self.role = role
+    }
+    
     public var body: some View {
         NnTryButton(action: action, role: role, label: label)
     }
@@ -23,6 +29,6 @@ public struct TryButton<Label>: View where Label: View {
 // MARK: - Helper Init
 public extension TryButton where Label == Text {
     init<S>(_ title: S, role: NnButtonRole? = nil, action: @escaping () throws -> Void) where S: StringProtocol {
-        self.init(label: { Text(title) }, role: role, action: action)
+        self.init(action: action, role: role, label: { Text(title) })
     }
 }
