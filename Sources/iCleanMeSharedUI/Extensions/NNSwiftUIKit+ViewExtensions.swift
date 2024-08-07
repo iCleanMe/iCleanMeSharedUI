@@ -145,6 +145,10 @@ public extension View {
 
 // MARK: - Alerts
 public extension View {
+    func asyncAlert<AlertView: View>(_ message: String, isPresented: Binding<Bool>, buttonInfo: AccessibleItem? = nil, cancelInfo: AccessibleItem? = nil, action: @escaping () async throws -> Void, cancelAction: @escaping () -> Void = { }, @ViewBuilder alertView: @escaping () -> AlertView) -> some View {
+        nnAsyncAlert(message, isPresented: isPresented, buttonInfo: buttonInfo?.toNnInfo(), cancelInfo: cancelInfo?.toNnInfo(), action: action, cancelAction: cancelAction, alertView: alertView)
+    }
+    
     func fieldAlert(_ message: String, isPresented: Binding<Bool>, fieldInfo: AccessibleItem, buttonInfo: AccessibleItem? = nil, cancelInfo: AccessibleItem? = nil, action: @escaping (String) async throws -> Void) -> some View {
         nnFieldAlert(message, isPresented: isPresented, fieldInfo: fieldInfo.toNnInfo(), buttonInfo: buttonInfo?.toNnInfo(), cancelInfo: cancelInfo?.toNnInfo(),  action: action)
     }
