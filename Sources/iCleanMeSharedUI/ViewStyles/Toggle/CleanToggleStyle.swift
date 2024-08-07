@@ -8,9 +8,12 @@
 import SwiftUI
 
 public struct CleanToggleStyle: ToggleStyle {
+    let boldLable: Bool
+    
     public func makeBody(configuration: Self.Configuration) -> some View {
         HStack {
             configuration.label
+                .bold(boldLable)
                 
             Spacer()
             RoundedRectangle(cornerRadius: 16, style: .circular)
@@ -32,8 +35,8 @@ public struct CleanToggleStyle: ToggleStyle {
 }
 
 public extension ToggleStyle where Self == CleanToggleStyle {
-    static func cleanToggleStyle() -> CleanToggleStyle {
-        return .init()
+    static func cleanToggleStyle(boldLabel: Bool = false) -> CleanToggleStyle {
+        return .init(boldLable: boldLabel)
     }
 }
 
