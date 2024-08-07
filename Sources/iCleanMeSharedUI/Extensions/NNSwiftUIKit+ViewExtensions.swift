@@ -9,6 +9,7 @@ import SwiftUI
 import NnSwiftUIKit
 
 public protocol DisplayableError: NnDisplayableError {}
+
 public extension DisplayableError {
     var title: String {
         return "Error"
@@ -38,7 +39,7 @@ public extension View {
     }
     
     func withDiscardChangesDismissButton<Item: Equatable>(itemToModify: Item, accessibilityId: String? = nil, dismissButtonInfo: AccessibleItem? = nil) -> some View {
-        nnWithDiscardChangesNavBarDismissButton(itemToModify: itemToModify, accessibilityId: accessibilityId, dismissButtonInfo: dismissButtonInfo)
+        nnWithDiscardChangesNavBarDismissButton(itemToModify: itemToModify, accessibilityId: accessibilityId, dismissButtonInfo: dismissButtonInfo?.toNnInfo())
     }
     
     func showcased(_ title: String, order: Int, cornerRadius: CGFloat, style: RoundedCornerStyle = .continuous, scale: CGFloat = 1) -> some View {
@@ -87,7 +88,7 @@ public extension View {
     }
     
     func asyncConfirmation(showingConfirmation: Binding<Bool>, role: ButtonRole? = nil, buttonInfo: AccessibleItem, message: String, textCase: Text.Case? = nil, action: @escaping () async throws -> Void) -> some View {
-        nnAsyncConfirmation(showingConfirmation: showingConfirmation, role: role, buttonInfo: buttonInfo, message: message, action: action)
+        nnAsyncConfirmation(showingConfirmation: showingConfirmation, role: role, buttonInfo: buttonInfo.toNnInfo(), message: message, action: action)
             .textCase(textCase)
     }
     
@@ -116,7 +117,7 @@ public extension View {
     }
     
     func withSwipeDelete(_ message: String = "Are you sure you want to delete this item?", isActive: Bool = true, alertButtonInfo: AccessibleItem? = nil, delete: @escaping () async throws -> Void) -> some View  {
-        nnWithSwipeDelete(message: message, isActive: isActive, alertButtonInfo: alertButtonInfo, delete: delete)
+        nnWithSwipeDelete(message: message, isActive: isActive, alertButtonInfo: alertButtonInfo?.toNnInfo(), delete: delete)
     }
 }
 
@@ -145,11 +146,11 @@ public extension View {
 // MARK: - Alerts
 public extension View {
     func fieldAlert(_ message: String, isPresented: Binding<Bool>, fieldInfo: AccessibleItem, buttonInfo: AccessibleItem? = nil, cancelInfo: AccessibleItem? = nil, action: @escaping (String) async throws -> Void) -> some View {
-        nnFieldAlert(message, isPresented: isPresented, fieldInfo: fieldInfo, buttonInfo: buttonInfo, cancelInfo: cancelInfo,  action: action)
+        nnFieldAlert(message, isPresented: isPresented, fieldInfo: fieldInfo.toNnInfo(), buttonInfo: buttonInfo?.toNnInfo(), cancelInfo: cancelInfo?.toNnInfo(),  action: action)
     }
     
     func doubleFieldAlert(_ message: String, isPresented: Binding<Bool>, firstFieldInfo: AccessibleItem, secondFieldInfo: AccessibleItem, buttonInfo: AccessibleItem? = nil, cancelInfo: AccessibleItem? = nil, action: @escaping (String, String) async throws -> Void) -> some View {
-        nnDoubleFieldAlert(message, isPresented: isPresented, firstFieldInfo: firstFieldInfo, secondFieldInfo: secondFieldInfo, buttonInfo: buttonInfo, cancelInfo: cancelInfo, action: action)
+        nnDoubleFieldAlert(message, isPresented: isPresented, firstFieldInfo: firstFieldInfo.toNnInfo(), secondFieldInfo: secondFieldInfo.toNnInfo(), buttonInfo: buttonInfo?.toNnInfo(), cancelInfo: cancelInfo?.toNnInfo(), action: action)
     }
 }
 
@@ -165,6 +166,24 @@ public extension View {
     }
     
     func withSwipeAction(info: AccessibleItem, systemImage: String? = nil, tint: Color, edge: HorizontalEdge? = nil, isActive: Bool = true, action: @escaping () -> Void) -> some View {
-        nnWithSwipeAction(info: info, systemImage: systemImage, tint: tint, edge: edge, isActive: isActive, action: action)
+        nnWithSwipeAction(info: info.toNnInfo(), systemImage: systemImage, tint: tint, edge: edge, isActive: isActive, action: action)
+    }
+}
+
+
+// MARK: - Helpers
+public struct AccessibleItem {
+    public let prompt: String
+    public let accessibilityId: String?
+    
+    public init(prompt: String, accessibilityId: String? = nil) {
+        self.prompt = prompt
+        self.accessibilityId = accessibilityId
+    }
+}
+
+extension AccessibleItem {
+    func toNnInfo() -> NnSwiftUIKit.AccessibleItem {
+        return .init(prompt: prompt, accessibilityId: accessibilityId)
     }
 }
