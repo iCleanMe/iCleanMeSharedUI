@@ -38,7 +38,7 @@ public extension View {
         nnWithNavBarButton(placement: placement, buttonContent: buttonContent, font: font, textColor: textColor, accessibilityId: accessibilityId, action: action)
     }
     
-    func withDiscardChangesDismissButton<Item: Equatable>(itemToModify: Item, accessibilityId: String? = nil, dismissButtonInfo: AccessibleItem? = nil) -> some View {
+    func withDiscardChangesDismissButton<Item: Equatable>(itemToModify: Item, accessibilityId: String? = nil, dismissButtonInfo: AccessibleItemInfo? = nil) -> some View {
         nnWithDiscardChangesNavBarDismissButton(itemToModify: itemToModify, accessibilityId: accessibilityId, dismissButtonInfo: dismissButtonInfo?.toNnInfo())
     }
     
@@ -87,7 +87,7 @@ public extension View {
         nnAsyncHandleURL(hideLoadingIndicator: hideLoadingIndicator, asyncAction: asyncAction)
     }
     
-    func asyncConfirmation(showingConfirmation: Binding<Bool>, role: ButtonRole? = nil, buttonInfo: AccessibleItem, message: String, textCase: Text.Case? = nil, action: @escaping () async throws -> Void) -> some View {
+    func asyncConfirmation(showingConfirmation: Binding<Bool>, role: ButtonRole? = nil, buttonInfo: AccessibleItemInfo, message: String, textCase: Text.Case? = nil, action: @escaping () async throws -> Void) -> some View {
         nnAsyncConfirmation(showingConfirmation: showingConfirmation, role: role, buttonInfo: buttonInfo.toNnInfo(), message: message, action: action)
             .textCase(textCase)
     }
@@ -116,7 +116,7 @@ public extension View {
         nnAsNavLink(data, isActive: isActive)
     }
     
-    func withSwipeDelete(_ message: String = "Are you sure you want to delete this item?", isActive: Bool = true, alertButtonInfo: AccessibleItem? = nil, delete: @escaping () async throws -> Void) -> some View  {
+    func withSwipeDelete(_ message: String = "Are you sure you want to delete this item?", isActive: Bool = true, alertButtonInfo: AccessibleItemInfo? = nil, delete: @escaping () async throws -> Void) -> some View  {
         nnWithSwipeDelete(message: message, isActive: isActive, alertButtonInfo: alertButtonInfo?.toNnInfo(), delete: delete)
     }
 }
@@ -145,15 +145,15 @@ public extension View {
 
 // MARK: - Alerts
 public extension View {
-    func asyncAlert<AlertView: View>(_ message: String, isPresented: Binding<Bool>, buttonInfo: AccessibleItem? = nil, cancelInfo: AccessibleItem? = nil, action: @escaping () async throws -> Void, cancelAction: @escaping () -> Void = { }, @ViewBuilder alertView: @escaping () -> AlertView) -> some View {
+    func asyncAlert<AlertView: View>(_ message: String, isPresented: Binding<Bool>, buttonInfo: AccessibleItemInfo? = nil, cancelInfo: AccessibleItemInfo? = nil, action: @escaping () async throws -> Void, cancelAction: @escaping () -> Void = { }, @ViewBuilder alertView: @escaping () -> AlertView) -> some View {
         nnAsyncAlert(message, isPresented: isPresented, buttonInfo: buttonInfo?.toNnInfo(), cancelInfo: cancelInfo?.toNnInfo(), action: action, cancelAction: cancelAction, alertView: alertView)
     }
     
-    func fieldAlert(_ message: String, isPresented: Binding<Bool>, fieldInfo: AccessibleItem, buttonInfo: AccessibleItem? = nil, cancelInfo: AccessibleItem? = nil, action: @escaping (String) async throws -> Void) -> some View {
+    func fieldAlert(_ message: String, isPresented: Binding<Bool>, fieldInfo: AccessibleItemInfo, buttonInfo: AccessibleItemInfo? = nil, cancelInfo: AccessibleItemInfo? = nil, action: @escaping (String) async throws -> Void) -> some View {
         nnFieldAlert(message, isPresented: isPresented, fieldInfo: fieldInfo.toNnInfo(), buttonInfo: buttonInfo?.toNnInfo(), cancelInfo: cancelInfo?.toNnInfo(),  action: action)
     }
     
-    func doubleFieldAlert(_ message: String, isPresented: Binding<Bool>, firstFieldInfo: AccessibleItem, secondFieldInfo: AccessibleItem, buttonInfo: AccessibleItem? = nil, cancelInfo: AccessibleItem? = nil, action: @escaping (String, String) async throws -> Void) -> some View {
+    func doubleFieldAlert(_ message: String, isPresented: Binding<Bool>, firstFieldInfo: AccessibleItemInfo, secondFieldInfo: AccessibleItemInfo, buttonInfo: AccessibleItemInfo? = nil, cancelInfo: AccessibleItemInfo? = nil, action: @escaping (String, String) async throws -> Void) -> some View {
         nnDoubleFieldAlert(message, isPresented: isPresented, firstFieldInfo: firstFieldInfo.toNnInfo(), secondFieldInfo: secondFieldInfo.toNnInfo(), buttonInfo: buttonInfo?.toNnInfo(), cancelInfo: cancelInfo?.toNnInfo(), action: action)
     }
 }
@@ -169,14 +169,14 @@ public extension View {
         nnTappable(tapIsActive: tapIsActive, withChevron: withChevron, tint: tint, onTapGesture: onTapGesture)
     }
     
-    func withSwipeAction(info: AccessibleItem, systemImage: String? = nil, tint: Color, edge: HorizontalEdge? = nil, isActive: Bool = true, action: @escaping () -> Void) -> some View {
+    func withSwipeAction(info: AccessibleItemInfo, systemImage: String? = nil, tint: Color, edge: HorizontalEdge? = nil, isActive: Bool = true, action: @escaping () -> Void) -> some View {
         nnWithSwipeAction(info: info.toNnInfo(), systemImage: systemImage, tint: tint, edge: edge, isActive: isActive, action: action)
     }
 }
 
 
 // MARK: - Helpers
-public struct AccessibleItem {
+public struct AccessibleItemInfo {
     public let prompt: String
     public let accessibilityId: String?
     
@@ -186,8 +186,8 @@ public struct AccessibleItem {
     }
 }
 
-extension AccessibleItem {
-    func toNnInfo() -> NnSwiftUIKit.AccessibleItem {
+extension AccessibleItemInfo {
+    func toNnInfo() -> NnSwiftUIKit.AccessibleItemInfo {
         return .init(prompt: prompt, accessibilityId: accessibilityId)
     }
 }
