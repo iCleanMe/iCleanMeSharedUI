@@ -15,7 +15,7 @@ let package = Package(
             targets: ["iCleanMeSharedUI"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/nikolainobadi/NnSwiftUIKit", branch: "main")
+        .package(url: "https://github.com/nikolainobadi/NnSwiftUIKit", from: "1.0.0")
     ],
     targets: [
         .target(

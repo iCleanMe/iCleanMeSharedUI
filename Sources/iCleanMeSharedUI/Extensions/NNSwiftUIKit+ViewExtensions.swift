@@ -10,12 +10,6 @@ import NnSwiftUIKit
 
 public protocol DisplayableError: NnDisplayableError {}
 
-public extension DisplayableError {
-    var title: String {
-        return "Error"
-    }
-}
-
 #if canImport(UIKit)
 public extension View {
     var isSmallPhone: Bool {
@@ -40,6 +34,10 @@ public extension View {
     
     func withDiscardChangesDismissButton<Item: Equatable>(itemToModify: Item, accessibilityId: String? = nil, dismissButtonInfo: AccessibleItemInfo? = nil) -> some View {
         nnWithDiscardChangesNavBarDismissButton(itemToModify: itemToModify, accessibilityId: accessibilityId, dismissButtonInfo: dismissButtonInfo?.toNnInfo())
+    }
+    
+    func handlingVerticalPanGesture(handleSwipeDirection: @escaping (PanGestureSwipDirection) -> Void) -> some View {
+        nnHandlingVerticalPanGesture(handleSwipeDirection: handleSwipeDirection)
     }
     
     func showcased(_ title: String, order: Int, cornerRadius: CGFloat, style: RoundedCornerStyle = .continuous, scale: CGFloat = 1) -> some View {

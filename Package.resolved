@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/nikolainobadi/NnSwiftUIKit",
       "state" : {
-        "branch" : "main",
-        "revision" : "5608750dcb3bfdee1708fbd95653b83bb935ae4a"
+        "revision" : "1a18f7240313013e6c1741d497680e217978c9b2",
+        "version" : "1.0.0"
       }
     }
   ],
