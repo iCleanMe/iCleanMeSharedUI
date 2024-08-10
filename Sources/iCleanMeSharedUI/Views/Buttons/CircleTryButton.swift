@@ -12,7 +12,7 @@ public struct CircleTryButton: View {
     let accessibilityId: String?
     let action: () throws -> Void
     
-    public init(accessibilityId: String? = nil, action: @escaping () -> Void) {
+    public init(accessibilityId: String? = nil, action: @escaping () throws -> Void) {
         self.accessibilityId = accessibilityId
         self.action = action
     }
