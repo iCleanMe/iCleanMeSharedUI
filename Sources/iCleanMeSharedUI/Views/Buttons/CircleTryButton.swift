@@ -9,10 +9,12 @@ import SwiftUI
 import NnSwiftUIKit
 
 public struct CircleTryButton: View {
+    let gradient: GradientType
     let accessibilityId: String?
     let action: () throws -> Void
     
-    public init(accessibilityId: String? = nil, action: @escaping () throws -> Void) {
+    public init(gradient: GradientType = .seaNight, accessibilityId: String? = nil, action: @escaping () throws -> Void) {
+        self.gradient = gradient
         self.accessibilityId = accessibilityId
         self.action = action
     }
@@ -32,7 +34,7 @@ public struct CircleTryButton: View {
         }
         .nnSetAccessibiltyId(accessibilityId)
         .frame(maxWidth: buttonSize, maxHeight: buttonSize)
-        .withGradientBackground(.seaNight)
+        .withGradientBackground(gradient)
         .clipShape(Circle())
         .shadow(color: .primary, radius: 7)
     }
