@@ -190,7 +190,7 @@ extension AccessibleItemInfo {
     }
 }
 
-
+#if canImport(UIKit)
 public enum PanGestureSwipeDirection {
     case up, down
 }
@@ -205,3 +205,4 @@ extension NnSwiftUIKit.PanGestureSwipDirection {
         }
     }
 }
+#endif
