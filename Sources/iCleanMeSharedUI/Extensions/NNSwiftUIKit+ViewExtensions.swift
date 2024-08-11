@@ -36,8 +36,8 @@ public extension View {
         nnWithDiscardChangesNavBarDismissButton(itemToModify: itemToModify, accessibilityId: accessibilityId, dismissButtonInfo: dismissButtonInfo?.toNnInfo())
     }
     
-    func handlingVerticalPanGesture(handleSwipeDirection: @escaping (PanGestureSwipDirection) -> Void) -> some View {
-        nnHandlingVerticalPanGesture(handleSwipeDirection: handleSwipeDirection)
+    func handlingVerticalPanGesture(handleSwipeDirection: @escaping (PanGestureSwipeDirection) -> Void) -> some View {
+        nnHandlingVerticalPanGesture(handleSwipeDirection: { handleSwipeDirection($0.toDirection()) })
     }
     
     func showcased(_ title: String, order: Int, cornerRadius: CGFloat, style: RoundedCornerStyle = .continuous, scale: CGFloat = 1) -> some View {
@@ -187,5 +187,21 @@ public struct AccessibleItemInfo {
 extension AccessibleItemInfo {
     func toNnInfo() -> NnSwiftUIKit.AccessibleItemInfo {
         return .init(prompt: prompt, accessibilityId: accessibilityId)
+    }
+}
+
+
+public enum PanGestureSwipeDirection {
+    case up, down
+}
+
+extension NnSwiftUIKit.PanGestureSwipDirection {
+    func toDirection() -> PanGestureSwipeDirection {
+        switch self {
+        case .up:
+            return .up
+        case .down:
+            return .down
+        }
     }
 }
